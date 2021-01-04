@@ -8,6 +8,7 @@ import {
 import Logo from 'components/Logo'
 import * as S from './styles'
 import Button from '../Button'
+import MediaMatch from '../MediaMatch'
 
 export type MenuProps = {
   username?: string
@@ -18,12 +19,23 @@ const Menu = ({ username }: MenuProps) => {
 
   return (
     <S.Container>
-      <S.IconWrapper onClick={() => setIsOpen(true)}>
-        <MenuIcon size={20} aria-label="Open Menu" />
-      </S.IconWrapper>
+      <MediaMatch lessThan="medium">
+        <S.IconWrapper onClick={() => setIsOpen(true)}>
+          <MenuIcon size={20} aria-label="Open Menu" />
+        </S.IconWrapper>
+      </MediaMatch>
+
       <S.LogoWrapper>
         <Logo hideOnMobile />
       </S.LogoWrapper>
+
+      <MediaMatch greaterThan="medium">
+        <S.MenuNav>
+          <S.MenuLink href="#">Home</S.MenuLink>
+          <S.MenuLink href="#">Explore</S.MenuLink>
+        </S.MenuNav>
+      </MediaMatch>
+
       <S.MenuGroup>
         <S.IconWrapper>
           <SeacrIcon aria-label="Search" />
@@ -31,7 +43,13 @@ const Menu = ({ username }: MenuProps) => {
         <S.IconWrapper>
           <ShoppingCarIcon aria-label="Open Shopping Cart" />
         </S.IconWrapper>
+        {!username && (
+          <MediaMatch greaterThan="medium">
+            <Button>Sign in</Button>
+          </MediaMatch>
+        )}
       </S.MenuGroup>
+
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
         <S.MenuNav>

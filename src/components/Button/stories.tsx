@@ -28,3 +28,12 @@ withIcon.args = {
   children: 'Buy now',
   icon: <MdAddShoppingCart />
 }
+
+export const asLink: Story<ButtonProps> = args => <Button {...args} />
+
+asLink.args = {
+  size: 'small',
+  children: 'Buy now',
+  as: 'a',
+  href: '/link'
+}

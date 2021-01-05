@@ -46,6 +46,10 @@ export const Container = styled.button<ContainerProps>`
     padding: ${theme.spacings.xxsmall};
     cursor: pointer;
 
+    &:hover {
+      background: linear-gradient(180deg, #e33565 0%, #d958a6 50%);
+    }
+
     ${!!size && containerModifiers[size](theme)}
     ${!!fullWidth && containerModifiers.fullWidth()}
     ${!!hasIcon && containerModifiers.withIcon(theme)}

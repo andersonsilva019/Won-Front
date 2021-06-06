@@ -56,5 +56,9 @@ describe('<GameCard />', () => {
     expect(screen.getByText('150')).toHaveStyle({
       backgroundColor: theme.colors.secondary
     })
+
+    expect(screen.getByText('150')).not.toHaveStyle({
+      textDecoration: 'line-through'
+    })
   })
 })

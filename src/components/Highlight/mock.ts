@@ -1,5 +1,5 @@
 export default {
-  title: 'Read Dead it’s back',
+  title: 'Read Dead is back',
   subtitle: 'Come see John’s new adventures',
   buttonLink: '/',
   buttonLabel: 'Buy now',

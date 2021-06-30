@@ -25,4 +25,14 @@ describe('<Checkbox />', () => {
       color: '#030517'
     })
   })
+
+  it('should render with white label by default', () => {
+    renderWithTheme(
+      <Checkbox label="Checkbox label" labelFor="check" labelColor="white" />
+    )
+
+    expect(screen.getByText(/checkbox label/i)).toHaveStyle({
+      color: '#FAFAFA'
+    })
+  })
 })

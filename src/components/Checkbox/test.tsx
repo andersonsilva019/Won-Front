@@ -9,4 +9,10 @@ describe('<Checkbox />', () => {
     expect(screen.getByText(/checkbox label/i)).toHaveAttribute('for', 'check')
     expect(screen.getByRole('checkbox')).toHaveAttribute('id', 'check')
   })
+
+  it('should not render when label is undefinded', () => {
+    renderWithTheme(<Checkbox />)
+
+    expect(screen.queryByLabelText('checkbox label')).not.toBeInTheDocument()
+  })
 })

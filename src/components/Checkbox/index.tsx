@@ -3,18 +3,23 @@ import * as S from './styles'
 
 export type CheckboxProps = {
   onCheck?: (status: boolean) => void
+  isChecked?: boolean
   label?: string
   labelFor?: string
   labelColor?: 'black' | 'white'
+  value?: string | ReadonlyArray<string> | number
 } & InputHTMLAttributes<HTMLInputElement>
 
 const Checkbox = ({
   label,
+  isChecked = false,
   labelFor = '',
   labelColor = 'white',
-  onCheck
+  onCheck,
+  value,
+  ...props
 }: CheckboxProps) => {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(isChecked)
 
   const onChange = () => {
     const status = !checked
@@ -32,6 +37,8 @@ const Checkbox = ({
         type="checkbox"
         onChange={onChange}
         checked={checked}
+        value={value}
+        {...props}
       />
       {!!label && (
         <S.Label htmlFor={labelFor} labelColor={labelColor}>

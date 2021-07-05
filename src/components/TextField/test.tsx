@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
+import { Email } from '@styled-icons/material-outlined'
 import userEvent from '@testing-library/user-event'
 import { renderWithTheme } from 'utils/test/helpers'
 import TextField from '.'
@@ -24,6 +25,13 @@ describe('<TextField />', () => {
     expect(screen.getByPlaceholderText(/hello/i)).toBeInTheDocument()
   })
 
+  it('Renders with Icon on the right side', () => {
+    renderWithTheme(
+      <TextField icon={<Email data-testid="icon" />} iconPosition="right" />
+    )
+
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
+  })
   it('should call onInput function', async () => {
     const onInput = jest.fn()
 
@@ -42,6 +50,12 @@ describe('<TextField />', () => {
     })
 
     expect(onInput).toHaveBeenCalledWith(text)
+  })
+
+  it('Renders with Icon', () => {
+    renderWithTheme(<TextField icon={<Email data-testid="icon" />} />)
+
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 
   it('Is accessible by tab', () => {

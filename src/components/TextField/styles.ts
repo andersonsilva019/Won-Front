@@ -1,10 +1,28 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 import { TextFieldProps } from '.'
 
 type IconPositionProps = Pick<TextFieldProps, 'iconPosition'>
 
-export const Container = styled.div``
+const containerModifiers = {
+  disabled: (theme: DefaultTheme) => css`
+    ${Label},
+    ${Input},
+    ${Icon} {
+      cursor: not-allowed;
+      color: ${theme.colors.gray};
+      &::placeholder {
+        color: currentColor;
+      }
+    }
+  `
+}
+
+export const Container = styled.div<Pick<TextFieldProps, 'disabled'>>`
+  ${({ theme, disabled }) => css`
+    ${disabled && containerModifiers.disabled(theme)}
+  `}
+`
 
 export const Label = styled.label`
   ${({ theme }) => css`

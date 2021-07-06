@@ -4,7 +4,18 @@ import { TextFieldProps } from '.'
 
 type IconPositionProps = Pick<TextFieldProps, 'iconPosition'>
 
+type ContainerProps = Pick<TextFieldProps, 'disabled'> & { error?: boolean }
+
 const containerModifiers = {
+  error: (theme: DefaultTheme) => css`
+    ${InputWrapper} {
+      border-color: ${theme.colors.red};
+    }
+    ${Icon},
+    ${Label} {
+      color: ${theme.colors.red};
+    }
+  `,
   disabled: (theme: DefaultTheme) => css`
     ${Label},
     ${Input},
@@ -17,9 +28,9 @@ const containerModifiers = {
     }
   `
 }
-
-export const Container = styled.div<Pick<TextFieldProps, 'disabled'>>`
-  ${({ theme, disabled }) => css`
+export const Container = styled.div<ContainerProps>`
+  ${({ theme, disabled, error }) => css`
+    ${error && containerModifiers.error(theme)}
     ${disabled && containerModifiers.disabled(theme)}
   `}
 `
@@ -69,5 +80,12 @@ export const Icon = styled.div<IconPositionProps>`
     & > svg {
       width: 100%;
     }
+  `}
+`
+
+export const Error = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.red};
+    font-size: ${theme.font.sizes.xsmall};
   `}
 `

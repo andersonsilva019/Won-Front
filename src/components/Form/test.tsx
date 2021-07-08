@@ -1,4 +1,3 @@
-import { render, screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/test/helpers'
 import { FormContainer, FormLink } from '.'
 

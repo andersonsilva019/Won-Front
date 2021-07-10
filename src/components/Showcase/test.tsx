@@ -1,9 +1,9 @@
 import '../../../.jest/match-media-mock'
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/test/helpers'
+import gamesMock from 'components/GameCardSlider/mock'
+import highLightMock from 'components/Highlight/mock'
 import Showcase from '.'
-import gamesMock from '../GameCardSlider/mock'
-import highLightMock from '../Highlight/mock'
 
 const games = gamesMock.slice(0, 1)
 

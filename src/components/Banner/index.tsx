@@ -13,7 +13,7 @@ export type BannerProps = {
   ribbonColor?: RibbonColor
 }
 
-const Banner = ({
+export const Banner = ({
   img,
   title,
   subtitle,
@@ -41,5 +41,3 @@ const Banner = ({
     </S.Container>
   )
 }
-
-export default Banner

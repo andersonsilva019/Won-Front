@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import Banner from '.'
+import { Banner } from '.'
 import { renderWithTheme } from 'utils/test/helpers'
 
 const props = {

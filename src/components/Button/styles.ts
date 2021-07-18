@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import styled, { css, DefaultTheme } from 'styled-components'
 import { darken } from 'polished'
 import { ButtonProps } from '.'
@@ -55,12 +57,12 @@ export const Container = styled.button<ContainerProps>`
     text-decoration: none;
 
     &:hover {
-      background: linear-gradient(180deg, #e33565 0%, #d958a6 50%);
+      background: ${minimal ? 'none' : 'linear-gradient(180deg, #e35565 0%, #d958a6 50%)'};
     }
 
     ${!!size && containerModifiers[size](theme)}
     ${!!fullWidth && containerModifiers.fullWidth()}
     ${!!hasIcon && containerModifiers.withIcon(theme)}
-    ${!!minimal && containerModifiers.minimal(theme)}
+    ${minimal && containerModifiers.minimal(theme)}
   `}
 `

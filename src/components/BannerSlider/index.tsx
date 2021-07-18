@@ -1,4 +1,4 @@
-import Banner, { BannerProps } from '../Banner'
+import { Banner, BannerProps } from '../Banner'
 import Slider, { SliderSettings } from '../Slider'
 import * as S from './styles'
 

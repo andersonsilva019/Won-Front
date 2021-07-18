@@ -8,12 +8,20 @@ type ButtonTypes =
 export type ButtonProps = {
   size?: 'small' | 'medium' | 'large'
   fullWidth?: boolean
+  minimal?: boolean
   icon?: JSX.Element
   as?: React.ElementType
 } & ButtonTypes
 
 const Button: React.ForwardRefRenderFunction<S.ContainerProps, ButtonProps> = (
-  { children, icon, size = 'medium', fullWidth = false, ...props },
+  {
+    children,
+    icon,
+    size = 'medium',
+    fullWidth = false,
+    minimal = false,
+    ...props
+  },
   ref
 ) => {
   return (
@@ -21,6 +29,7 @@ const Button: React.ForwardRefRenderFunction<S.ContainerProps, ButtonProps> = (
       ref={ref}
       size={size}
       fullWidth={fullWidth}
+      minimal={minimal}
       hasIcon={!!icon}
       {...props}
     >

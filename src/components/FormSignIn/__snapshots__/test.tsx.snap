@@ -35,7 +35,7 @@ exports[`<FormSignIn /> should render the form 1`] = `
 }
 
 .c8:hover {
-  background: linear-gradient(180deg,#e33565 0%,#d958a6 50%);
+  background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
 }
 
 .c2 {

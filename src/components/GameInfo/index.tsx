@@ -16,12 +16,10 @@ export type GameInfoProps = {
 const GameInfo = ({ title, price, description }: GameInfoProps) => {
   return (
     <S.Container>
-      <S.Header>
-        <Heading color="black" lineBottom>
-          {title}
-        </Heading>
-        <Ribbon color="secondary">{`$${price}`}</Ribbon>
-      </S.Header>
+      <Heading color="black" lineBottom>
+        {title}
+      </Heading>
+      <Ribbon color="secondary">{`$${price}`}</Ribbon>
       <S.Description>{description}</S.Description>
       <S.WrapperButtons>
         <Button size="large" icon={<AddShoppingCartIcon />}>

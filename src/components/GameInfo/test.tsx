@@ -10,13 +10,14 @@ const props = {
 
 describe('<GameInfo />', () => {
   it('should render title, description and price', () => {
-    renderWithTheme(<GameInfo {...props} />)
+    const { container } = renderWithTheme(<GameInfo {...props} />)
 
     expect(
       screen.getByRole('heading', { name: props.title })
     ).toBeInTheDocument()
     expect(screen.getByText(props.description)).toBeInTheDocument()
-    expect(screen.getByText(props.price)).toBeInTheDocument()
+    expect(screen.getByText(/\$215,00/)).toBeInTheDocument()
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render buttons', () => {

@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 import media from 'styled-media-query'
 import { HeadingProps, LineColor } from '.'
 
-const containerModifier = {
+export const containerModifiers = {
   small: (theme: DefaultTheme) => css`
     font-size: ${theme.font.sizes.medium};
 
@@ -44,8 +44,8 @@ export const Container = styled.h2<HeadingProps>`
   ${({ theme, color, lineLeft, lineBottom, size, lineColor }) => css`
     color: ${theme.colors[color!]};
 
-    ${lineLeft && containerModifier.lineLeft(theme, lineColor!)}
-    ${lineBottom && containerModifier.lineBottom(theme, lineColor!)}
-    ${!!size && containerModifier[size](theme)}
+    ${lineLeft && containerModifiers.lineLeft(theme, lineColor!)}
+    ${lineBottom && containerModifiers.lineBottom(theme, lineColor!)}
+    ${!!size && containerModifiers[size](theme)}
   `}
 `

@@ -5,9 +5,9 @@ import GameDetails, { GameDetailsProps } from 'components/GameDetails'
 import TextContent from 'components/TextContent'
 import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
+import Showcase from 'components/Showcase'
 
 import * as S from './styles'
-import Showcase from 'components/Showcase'
 
 export type GameTemplateProps = {
   cover: string

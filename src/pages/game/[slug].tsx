@@ -1,5 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Game, { GameTemplateProps } from 'templates/Game'
+import gamesMock from 'components/GameCardSlider/mock'
+import highlightMock from 'components/Highlight/mock'
 import GalleryMock from 'components/Gallery/mock'
 
 export default function Index(props: GameTemplateProps) {
@@ -51,7 +53,10 @@ export const getStaticProps: GetStaticProps<GameTemplateProps> = async () => {
         publisher: 'CD PROJEKT RED',
         rating: 'BR18',
         genres: ['Action', 'Role-playing']
-      }
+      },
+      recommendedGames: gamesMock,
+      upcomingGames: gamesMock,
+      upcomingHighlights: highlightMock
     }
   }
 }

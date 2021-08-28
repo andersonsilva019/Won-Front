@@ -9,7 +9,10 @@ export const Container = styled.div`
 `
 
 export const Content = styled.div`
-  flex: 1 0 auto;
+  ${({ theme }) => css`
+    flex: 1 0 auto;
+    margin-top: ${theme.spacings.xlarge};
+  `}
 `
 
 export const SectionFooter = styled.section`

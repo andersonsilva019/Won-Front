@@ -9,7 +9,7 @@ const props: GameItemProps = {
 }
 
 describe('<GameItem />', () => {
-  it('should render correcly', () => {
+  it('should render correcly GameItem', () => {
     renderWithTheme(<GameItem {...props} />)
 
     expect(

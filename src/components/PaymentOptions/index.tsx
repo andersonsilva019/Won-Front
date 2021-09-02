@@ -12,8 +12,8 @@ export type PaymentCard = {
 }
 
 export type PaymentOptionsProps = {
-  cards?: PaymentCard[]
-  handlePayment?: () => void
+  cards: PaymentCard[]
+  handlePayment: () => void
 }
 
 const PaymentOptions = ({ cards, handlePayment }: PaymentOptionsProps) => {

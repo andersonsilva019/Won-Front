@@ -111,6 +111,7 @@ exports[`<TextField /> Renders with error 1`] = `
     <input
       class="c8"
       id="TextField"
+      name="TextField"
       type="text"
       value=""
     />

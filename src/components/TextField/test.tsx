@@ -6,7 +6,7 @@ import TextField from '.'
 
 describe('<TextField />', () => {
   it('should render with label and labelFor', () => {
-    renderWithTheme(<TextField label="label input" labelFor="input" />)
+    renderWithTheme(<TextField label="label input" name="input" />)
 
     expect(screen.getByLabelText(/label input/i)).toBeInTheDocument()
     expect(screen.getByRole('textbox')).toHaveAttribute('id', 'input')
@@ -16,7 +16,7 @@ describe('<TextField />', () => {
     renderWithTheme(<TextField />)
 
     expect(screen.queryByLabelText(/label input/)).not.toBeInTheDocument()
-    expect(screen.getByRole('textbox')).toHaveAttribute('id', '')
+    expect(screen.queryByRole('textbox')).not.toHaveAttribute('id', '')
   })
 
   it('should render with placeholder', () => {
@@ -36,7 +36,7 @@ describe('<TextField />', () => {
     const onInput = jest.fn()
 
     renderWithTheme(
-      <TextField label="label input" labelFor="input" onInput={onInput} />
+      <TextField label="label input" name="input" onInput={onInput} />
     )
 
     const input = screen.getByRole('textbox')
@@ -59,9 +59,7 @@ describe('<TextField />', () => {
   })
 
   it('Is accessible by tab', () => {
-    renderWithTheme(
-      <TextField label="TextField" labelFor="TextField" id="TextField" />
-    )
+    renderWithTheme(<TextField label="TextField" name="TextField" />)
 
     const input = screen.getByLabelText('TextField')
     expect(document.body).toHaveFocus()
@@ -74,12 +72,7 @@ describe('<TextField />', () => {
     const onInput = jest.fn()
 
     renderWithTheme(
-      <TextField
-        onInput={onInput}
-        label="Label field"
-        labelFor="field"
-        disabled
-      />
+      <TextField onInput={onInput} label="Label field" name="field" disabled />
     )
 
     const input = screen.getByRole('textbox')
@@ -96,7 +89,7 @@ describe('<TextField />', () => {
   })
 
   it('Is not accessible by tab when disabled', () => {
-    renderWithTheme(<TextField label="Label field" labelFor="field" disabled />)
+    renderWithTheme(<TextField label="Label field" name="field" disabled />)
 
     const input = screen.getByLabelText('Label field')
     expect(document.body).toHaveFocus()
@@ -110,7 +103,7 @@ describe('<TextField />', () => {
       <TextField
         icon={<Email data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
+        name="TextField"
         error="Error message"
       />
     )

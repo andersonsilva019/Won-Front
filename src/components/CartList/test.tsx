@@ -18,4 +18,12 @@ describe('<CartList />', () => {
 
     expect(container.firstChild).toMatchSnapshot()
   })
+
+  it('should render the button', () => {
+    renderWithTheme(<CartList {...props} hasButton />)
+
+    expect(
+      screen.getByRole('link', { name: /buy it now/i })
+    ).toBeInTheDocument()
+  })
 })

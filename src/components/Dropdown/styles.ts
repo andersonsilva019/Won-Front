@@ -48,6 +48,28 @@ const containerModifiers = {
   `
 }
 
+const overlayModifiers = {
+  open: () => css`
+    opacity: 1;
+  `,
+  close: () => css`
+    opacity: 0;
+    pointer-events: none;
+  `
+}
+
+export const Overlay = styled.div<ContainerProps>`
+  ${({ isOpen }) => css`
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    ${isOpen && overlayModifiers.open()}
+    ${!isOpen && overlayModifiers.close()}
+  `}
+`
+
 export const Container = styled.div<ContainerProps>`
   ${({ theme, isOpen }) => css`
     position: relative;

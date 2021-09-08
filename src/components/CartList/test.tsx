@@ -14,7 +14,7 @@ describe('<CartList />', () => {
     const { container } = renderWithTheme(<CartList {...props} />)
 
     expect(screen.getAllByRole('heading')).toHaveLength(2)
-    expect(screen.getByText(props.total)).toBeInTheDocument()
+    expect(screen.getByText('R$ 200,00')).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
   })
@@ -25,5 +25,12 @@ describe('<CartList />', () => {
     expect(
       screen.getByRole('link', { name: /buy it now/i })
     ).toBeInTheDocument()
+  })
+
+  it('should render empty if there are no games', () => {
+    renderWithTheme(<CartList />)
+
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
+    expect(screen.queryByText(/total/i)).not.toBeInTheDocument()
   })
 })

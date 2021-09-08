@@ -19,7 +19,7 @@ export type CartTemplateProps = {
 const Cart = ({
   recommendedGames,
   recommendedHighlight,
-  items,
+  items = [],
   total,
   cards
 }: CartTemplateProps) => {
@@ -32,7 +32,7 @@ const Cart = ({
           My cart
         </Heading>
         {/* eslint-disable-next-line multiline-ternary */}
-        {items.length > 0 ? (
+        {items?.length > 0 ? (
           <S.Content>
             <CartList items={items} total={total} />
             <PaymentOptions cards={cards} handlePayment={handlePayment} />

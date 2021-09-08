@@ -51,6 +51,7 @@ const containerModifiers = {
 const overlayModifiers = {
   open: () => css`
     opacity: 1;
+    cursor: initial;
   `,
   close: () => css`
     opacity: 0;

@@ -29,6 +29,7 @@ export const getStaticProps: GetStaticProps<GamesTemplateProps> = async () => {
     const price = game.price === 0 ? 'FREE' : new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(game.price)
 
     return {
+      slug: game.slug,
       title: game.name,
       developer: game.developers[0].name,
       img: `http://localhost:1337${game.cover!.url}`,

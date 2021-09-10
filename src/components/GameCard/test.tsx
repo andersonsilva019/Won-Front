@@ -4,6 +4,7 @@ import theme from 'styles/theme'
 import GameCard from '.'
 
 const props = {
+  slug: 'population-zero',
   title: 'Population Zero',
   developer: 'Rockstars Games',
   img: '/images/red-dead-img.jpg',
@@ -12,7 +13,7 @@ const props = {
 
 describe('<GameCard />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<GameCard {...props} />)
+    const { container } = renderWithTheme(<GameCard {...props} />)
 
     expect(
       screen.getByRole('heading', { name: props.title })
@@ -21,6 +22,11 @@ describe('<GameCard />', () => {
     expect(
       screen.getByRole('heading', { name: props.developer })
     ).toBeInTheDocument()
+
+    expect(screen.getByRole('link', { name: props.title })).toHaveAttribute(
+      'href',
+      `/game/${props.slug}`
+    )
 
     expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
       'src',
@@ -32,6 +38,8 @@ describe('<GameCard />', () => {
     const price = screen.getByText('250')
 
     expect(price.innerHTML).toEqual(props.price)
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render price in label', () => {

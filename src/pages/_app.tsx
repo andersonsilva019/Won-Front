@@ -4,20 +4,11 @@ import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import theme from 'styles/theme'
 
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
-} from '@apollo/client'
-
-const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
-  cache: new InMemoryCache()
-})
-
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from '../../lib/apolloClient'
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const client = useApollo(pageProps.initialApolloState)
+
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>

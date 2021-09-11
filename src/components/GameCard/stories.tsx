@@ -9,8 +9,8 @@ export default {
     title: 'Population Zero',
     developer: 'Rockstars Games',
     img: '/images/red-dead-img.jpg',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 200,00'
+    price: 235.0,
+    promotionalPrice: 200.0
   },
   argTypes: {
     onFav: { action: 'Clicked' },

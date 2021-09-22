@@ -32,6 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
           ribbonSize: banner.ribbon?.size
         })
       })),
+      newGamesTitle: sections?.newGames?.title,
       newGames: newGames.map(game => ({
         slug: game.slug,
         title: game.name,
@@ -39,7 +40,16 @@ export const getStaticProps: GetStaticProps = async () => {
         img: `http://localhost:1337${game.cover?.url}`,
         price: game.price
       })),
-      newGamesTitle: sections?.newGames?.title,
+      freeGamesTitle: sections?.freeGames?.title,
+      freeHighligth: {
+        title: sections?.freeGames?.highlight?.title,
+        subtitle: sections?.freeGames?.highlight?.subtitle,
+        backgroundImage: `http://localhost:1337${sections?.freeGames?.highlight?.background?.url}`,
+        floatImage: `http://localhost:1337${sections?.freeGames?.highlight?.floatImage?.url}`,
+        buttonLink: sections?.freeGames?.highlight?.buttonLink,
+        buttonLabel: sections?.freeGames?.highlight?.buttonLabel,
+        alignment: sections?.freeGames?.highlight?.alignment
+      },
       freeGames: freeGames.map(game => ({
         slug: game.slug,
         title: game.name,
@@ -47,8 +57,16 @@ export const getStaticProps: GetStaticProps = async () => {
         img: `http://localhost:1337${game.cover?.url}`,
         price: game.price
       })),
-      freeGamesTitle: sections?.freeGames?.title,
-      freeHighligth: highLightMock,
+      mostPopularGamesTitle: sections?.popularGames?.title,
+      mostPopularHighlight: {
+        title: sections?.popularGames?.highlight?.title,
+        subtitle: sections?.popularGames?.highlight?.subtitle,
+        backgroundImage: `http://localhost:1337${sections?.popularGames?.highlight?.background?.url}`,
+        floatImage: `http://localhost:1337${sections?.popularGames?.highlight?.floatImage?.url}`,
+        buttonLink: sections?.popularGames?.highlight?.buttonLink,
+        buttonLabel: sections?.popularGames?.highlight?.buttonLabel,
+        alignment: sections?.popularGames?.highlight?.alignment
+      },
       mostPopularGames: sections!.popularGames!.games.map(game => ({
         slug: game.slug,
         title: game.name,
@@ -56,18 +74,23 @@ export const getStaticProps: GetStaticProps = async () => {
         img: `http://localhost:1337${game.cover?.url}`,
         price: game.price
       })),
-      mostPopularGamesTitle: sections?.popularGames?.title,
-      mostPopularHighlight: highLightMock,
+      upcommingGamesTitle: sections?.upcomingGames?.title,
+      upcommingHighligth: {
+        title: sections?.upcomingGames?.highlight?.title,
+        subtitle: sections?.upcomingGames?.highlight?.subtitle,
+        backgroundImage: `http://localhost:1337${sections?.upcomingGames?.highlight?.background?.url}`,
+        floatImage: `http://localhost:1337${sections?.upcomingGames?.highlight?.floatImage?.url}`,
+        buttonLink: sections?.upcomingGames?.highlight?.buttonLink,
+        buttonLabel: sections?.upcomingGames?.highlight?.buttonLabel,
+        alignment: sections?.upcomingGames?.highlight?.alignment
+      },
       upcommingGames: upcomingGames.map(game => ({
         slug: game.slug,
         title: game.name,
         developer: game.developers[0].name,
         img: `http://localhost:1337${game.cover?.url}`,
         price: game.price
-      })),
-      upcommingHighligth: highLightMock,
-      upcommingGamesTitle: sections?.upcomingGames?.title
-      // upcommingMoreGames: gamesMock
+      }))
     }
   }
 }

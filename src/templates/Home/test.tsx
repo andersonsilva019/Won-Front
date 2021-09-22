@@ -1,13 +1,13 @@
 import '../../../.jest/match-media-mock'
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/test/helpers'
-import Home from '.'
+import Home, { HomeTemplateProps } from '.'
 
 import bannerMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
-const props = {
+const props: HomeTemplateProps = {
   banners: bannerMock,
   newGames: [gamesMock[0]],
   mostPopularHighlight: highlightMock,
@@ -15,7 +15,11 @@ const props = {
   upcommingGames: [gamesMock[0]],
   upcommingHighligth: highlightMock,
   freeGames: [gamesMock[0]],
-  freeHighligth: highlightMock
+  freeHighligth: highlightMock,
+  upcommingGamesTitle: 'Upcoming Games',
+  freeGamesTitle: 'Free Games',
+  mostPopularGamesTitle: 'Most Popular Games',
+  newGamesTitle: 'New Games'
 }
 
 jest.mock('components/Showcase', () => {

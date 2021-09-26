@@ -8,7 +8,8 @@ import highlightMock from 'components/Highlight/mock'
 const props: WishlistTemplateProps = {
   games: gamesMock,
   recommendedGames: gamesMock.slice(0, 1),
-  recommendedHighlight: highlightMock
+  recommendedHighlight: highlightMock,
+  recommendedTitle: 'You may like these games'
 }
 
 jest.mock('components/Showcase', () => ({

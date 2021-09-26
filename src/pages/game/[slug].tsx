@@ -9,8 +9,6 @@ import {
   QueryGamesBySlugVariables
 } from 'graphql/generated/QueryGamesBySlug'
 
-import gamesMock from 'components/GameCardSlider/mock'
-
 import Game, { GameTemplateProps } from 'templates/Game'
 import { Platform, Rating } from 'components/GameDetails'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'

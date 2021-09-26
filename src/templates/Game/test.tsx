@@ -12,6 +12,7 @@ const props: GameTemplateProps = {
   cover: 'bg-image.jpg',
   gameInfo: gameInfoMock,
   gallery: galleryMock,
+  recommendedTitle: 'You may like these games',
   description: '<h1>content</h1>',
   details: gameDetailsMock,
   upcomingGames: gamesMock,

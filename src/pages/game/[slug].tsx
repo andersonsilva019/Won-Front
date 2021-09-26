@@ -10,10 +10,12 @@ import {
 } from 'graphql/generated/QueryGamesBySlug'
 
 import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
 
 import Game, { GameTemplateProps } from 'templates/Game'
 import { Platform, Rating } from 'components/GameDetails'
+import { QueryRecommended } from 'graphql/generated/QueryRecommended'
+import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
+import { gamesMapper } from 'utils/mappers'
 
 const apolloClient = initializeApollo()
 
@@ -42,9 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<GameTemplateProps> = async ({
-  params
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await apolloClient.query<
     QueryGamesBySlug,
     QueryGamesBySlugVariables
@@ -60,6 +60,13 @@ export const getStaticProps: GetStaticProps<GameTemplateProps> = async ({
   }
 
   const game = data.games[0]
+
+  // get recommended games
+  const { data: recommendedGamesData } = await apolloClient.query<
+    QueryRecommended
+  >({
+    query: QUERY_RECOMMENDED
+  })
 
   return {
     props: {
@@ -84,9 +91,11 @@ export const getStaticProps: GetStaticProps<GameTemplateProps> = async ({
         rating: game.rating as Rating,
         genres: game.categories.map(({ name }) => name)
       },
-      recommendedGames: gamesMock,
-      upcomingGames: gamesMock,
-      upcomingHighlights: highlightMock
+      recommendedTitle: recommendedGamesData.recommended?.section?.title,
+      recommendedGames: gamesMapper(
+        recommendedGamesData.recommended?.section?.games
+      ),
+      upcomingGames: gamesMock
     },
     revalidate: 60 // In seconds
   }

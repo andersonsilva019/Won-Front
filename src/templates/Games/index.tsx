@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import Base from 'templates/Base'
 
 import GameCard, { GameCardProps } from 'components/GameCard'
@@ -6,8 +5,7 @@ import { Container } from 'components/Container'
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import { Grid } from 'components/Grid'
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
-import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames'
-import { QUERY_GAMES } from 'graphql/queries/games'
+import { useQueryGames } from 'graphql/queries/games'
 import * as S from './styles'
 
 import { LoadingGamesShimmer } from './LoadingGamesShimmer'
@@ -18,10 +16,9 @@ export type GamesTemplateProps = {
 }
 
 const Games = ({ filterItems = [] }: GamesTemplateProps) => {
-  const { data, loading, fetchMore } = useQuery<
-    QueryGames,
-    QueryGamesVariables
-  >(QUERY_GAMES, { variables: { limit: 15 } })
+  const { data, loading, fetchMore } = useQueryGames({
+    variables: { limit: 15 }
+  })
 
   const handleFilter = () => {
     console.log('filter')

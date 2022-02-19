@@ -1,9 +1,10 @@
+import { MockedProvider } from '@apollo/client/testing';
 import { screen } from '@testing-library/react'
-import gamesMock from 'components/GameCardSlider/mock'
 import filterItemsMock from 'components/ExploreSidebar/mock'
 
 import Games from '.'
 import { renderWithTheme } from 'utils/test/helpers'
+import { QUERY_GAMES } from 'graphql/queries/games';
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -19,24 +20,58 @@ jest.mock('components/ExploreSidebar', () => ({
   }
 }))
 
-jest.mock('components/GameCard', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock GameCard" />
-  }
-}))
-
 describe('<Games />', () => {
-  it('should render sections', () => {
+  it('should render loading when starting the template', () => {
     renderWithTheme(
-      <Games filterItems={filterItemsMock} games={[gamesMock[0]]} />
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
     )
 
-    expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument()
+    expect(screen.getByTestId('loading')).toBeInTheDocument()
 
-    expect(
-      screen.getByRole('button', { name: /show more/i })
-    ).toBeInTheDocument()
+  })
+
+  it('should render sections', async () => {
+    renderWithTheme(
+      <MockedProvider
+        mocks={[
+          {
+            request: {
+              query: QUERY_GAMES,
+              variables: { limit: 15 }
+            },
+            result: {
+              data: {
+                games: [
+                  {
+                    name: 'RimWorld',
+                    slug: 'rimworld',
+                    cover: {
+                      url: '/uploads/rimworld_8e93acc963.jpg'
+                    },
+                    developers: [{ name: 'Ludeon Studios' }],
+                    price: 65.99,
+                    __typename: 'Game'
+                  }
+                ]
+              }
+            }
+          }
+        ]}
+        addTypename={false}
+      >
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    expect(screen.getByTestId('loading')).toBeInTheDocument()
+
+    expect(await screen.findByTestId('Mock ExploreSidebar')).toBeInTheDocument()
+
+    expect(await screen.findByText(/RimWorld/i)).toBeInTheDocument()
+
+    expect(await screen.findByRole('button', { name: /show more/i })).toBeInTheDocument()
+
   })
 })

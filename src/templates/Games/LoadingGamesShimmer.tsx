@@ -3,7 +3,7 @@ import Skeletron from 'components/Skeletron'
 
 export function LoadingGamesShimmer() {
   return (
-    <div>
+    <div data-testid="loading">
       <Container>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => (
           <ShimmerGame key={item} />

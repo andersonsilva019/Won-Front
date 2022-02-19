@@ -6,7 +6,7 @@ import {
 } from '@apollo/client'
 import apolloCache from 'utils/apolloCache'
 
-let apolloClient: ApolloClient<NormalizedCacheObject>
+let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
 function createApolloClient() {
   return new ApolloClient({
@@ -18,22 +18,23 @@ function createApolloClient() {
   })
 }
 
-export function initializeApollo(initialState = {}) {
-  const _apolloClient = apolloClient ?? createApolloClient()
+export function initializeApollo(initialState = null) {
+  // serve para verificar se já existe uma instância, para não criar outra
+  const apolloClientGlobal = apolloClient ?? createApolloClient()
 
+  // se a página usar o apolloClient no lado client
+  // hidratamos o estado inicial aqui
   if (initialState) {
-    const existingCache = _apolloClient.extract()
-    _apolloClient.cache.restore({ ...existingCache, ...initialState })
+    apolloClientGlobal.cache.restore(initialState)
   }
-
-  if (typeof window === 'undefined') return _apolloClient
-
-  apolloClient = apolloClient ?? _apolloClient
-
+  // sempre inicializando no SSR com cache limpo
+  if (typeof window === 'undefined') return apolloClientGlobal
+  // cria o apolloClient se estiver no client side
+  apolloClient = apolloClient ?? apolloClientGlobal
   return apolloClient
 }
 
-export function useApollo(initialState = {}) {
+export function useApollo(initialState = null) {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }

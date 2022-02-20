@@ -14,7 +14,7 @@ const queryString = {
   sort: 'price:asc'
 }
 
-describe('parseQueryStringToWhere()' , () => {
+describe('parseQueryStringToWhere()', () => {
   it('should parse queryString to where format', () => {
     const parseQuery = parseQueryStringToWhere({ queryString, filterItems })
 
@@ -26,16 +26,15 @@ describe('parseQueryStringToWhere()' , () => {
   })
 })
 
-describe('parseQueryStringToFilter()' , () => {
+describe('parseQueryStringToFilter()', () => {
   it('should parse queryString to filter values format', () => {
     const parseQuery = parseQueryStringToFilter({ queryString, filterItems })
 
     expect(parseQuery).toStrictEqual({
       price_lte: 100,
-      platforms:  ['windows', 'linux'],
+      platforms: ['windows', 'linux'],
       developers: ['Rockstar Games'],
-      sort: "price:asc"
+      sort: 'price:asc'
     })
   })
 })
-

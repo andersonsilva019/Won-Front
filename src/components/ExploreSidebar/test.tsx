@@ -15,7 +15,9 @@ describe('<ExploreSidebar />', () => {
     expect(
       screen.getByRole('heading', { name: /sort by/i })
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /platforms/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /platforms/i })
+    ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /genre/i })).toBeInTheDocument()
   })
 
@@ -84,8 +86,6 @@ describe('<ExploreSidebar />', () => {
       />
     )
 
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
-
     expect(onFilter).toHaveBeenCalledWith({
       platforms: ['windows'],
       sort_by: 'low-to-high'
@@ -98,12 +98,13 @@ describe('<ExploreSidebar />', () => {
     renderWithTheme(<ExploreSidebar items={itemsMock} onFilter={onFilter} />)
 
     userEvent.click(screen.getByRole('checkbox', { name: /windows/i }))
+    userEvent.click(screen.getByRole('checkbox', { name: /linux/i }))
     userEvent.click(screen.getByRole('radio', { name: /low to high/i }))
 
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
+    expect(onFilter).toHaveBeenCalledTimes(4)
 
     expect(onFilter).toHaveBeenCalledWith({
-      platforms: ['windows'],
+      platforms: ['windows', 'linux'],
       sort_by: 'low-to-high'
     })
   })
@@ -115,8 +116,6 @@ describe('<ExploreSidebar />', () => {
 
     userEvent.click(screen.getByRole('radio', { name: /high to low/i }))
     userEvent.click(screen.getByRole('radio', { name: /low to high/i }))
-
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(onFilter).toHaveBeenCalledWith({
       sort_by: 'low-to-high'
@@ -144,6 +143,12 @@ describe('<ExploreSidebar />', () => {
     expect(Element).toHaveStyleRule('opacity', '1', variant)
 
     userEvent.click(screen.getByLabelText(/close filters/))
+
+    expect(Element).not.toHaveStyleRule('opacity', '1', variant)
+
+    userEvent.click(screen.getByLabelText(/open filters/))
+
+    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(Element).not.toHaveStyleRule('opacity', '1', variant)
   })

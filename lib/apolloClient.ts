@@ -1,9 +1,5 @@
 import { useMemo } from 'react'
-import {
-  ApolloClient,
-  HttpLink,
-  NormalizedCacheObject
-} from '@apollo/client'
+import { ApolloClient, HttpLink, NormalizedCacheObject } from '@apollo/client'
 import apolloCache from 'utils/apolloCache'
 
 let apolloClient: ApolloClient<NormalizedCacheObject | null>

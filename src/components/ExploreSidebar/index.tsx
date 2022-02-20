@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Close } from '@styled-icons/material-outlined/Close'
 import { FilterList } from '@styled-icons/material-outlined/FilterList'
 import Radio from 'components/Radio'
@@ -37,8 +37,14 @@ const ExploreSidebar = ({
   const [values, setValues] = useState<Values>(initialValues)
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleFilter = () => {
+  useEffect(() => {
     onFilter(values)
+    // this method comes from another template
+    // that we don't have access
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values])
+
+  const handleFilterMenu = () => {
     setIsOpen(false)
   }
 
@@ -48,7 +54,10 @@ const ExploreSidebar = ({
 
   const handleCheckbox = (name: string, value: string) => {
     const currentList = (values[name] as string[]) || []
-    setValues(prevState => ({ ...prevState, [name]: removeDuplicateValues([...currentList, ...[value]]) }))
+    setValues(prevState => ({
+      ...prevState,
+      [name]: removeDuplicateValues([...currentList, ...[value]])
+    }))
   }
 
   return (
@@ -71,7 +80,9 @@ const ExploreSidebar = ({
                   name={field.name}
                   label={field.label}
                   labelFor={field.name}
-                  isChecked={(values[item.name] as string[])?.includes(field.name)}
+                  isChecked={(values[item.name] as string[])?.includes(
+                    field.name
+                  )}
                   onCheck={() => handleCheckbox(item.name, field.name)}
                 />
               ))}
@@ -85,7 +96,9 @@ const ExploreSidebar = ({
                   value={field.name}
                   label={field.label}
                   labelFor={field.name}
-                  defaultChecked={String(values[item.name]) === String(field.name)}
+                  defaultChecked={
+                    String(values[item.name]) === String(field.name)
+                  }
                   onCheck={() => handleRadio(item.name, field.name)}
                 />
               ))}
@@ -94,7 +107,7 @@ const ExploreSidebar = ({
         ))}
       </S.Content>
       <S.Footer>
-        <Button fullWidth size="medium" onClick={handleFilter}>
+        <Button fullWidth size="medium" onClick={handleFilterMenu}>
           Filter
         </Button>
       </S.Footer>

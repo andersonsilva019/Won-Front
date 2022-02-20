@@ -1,3 +1,3 @@
 export const removeDuplicateValues = (arr: any[]) => {
-  return [... new Set(arr)];
+  return [...new Set(arr)]
 }

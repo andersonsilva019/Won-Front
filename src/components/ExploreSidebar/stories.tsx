@@ -30,7 +30,7 @@ export const WithInitialValue: Story<ExploreSidebarProps> = args => (
 
 WithInitialValue.args = {
   initialValues: {
-    windows: true,
+    platforms: ['windows', 'linux'],
     'under-50': true,
     'under-150': true,
     free: true,

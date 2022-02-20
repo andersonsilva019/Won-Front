@@ -6,15 +6,15 @@ import Checkbox from 'components/Checkbox'
 import Heading from 'components/Heading'
 import Button from 'components/Button'
 import * as S from './styles'
+import { ParsedUrlQueryInput } from 'querystring'
+import { removeDuplicateValues } from 'utils/removeDuplicateValues'
 
 type Field = {
   label: string
   name: string
 }
 
-type Values = {
-  [field: string]: boolean | string
-}
+type Values = ParsedUrlQueryInput
 
 export type ItemProps = {
   title: string
@@ -42,8 +42,13 @@ const ExploreSidebar = ({
     setIsOpen(false)
   }
 
-  const handleChange = (name: string, value: string | boolean) => {
+  const handleRadio = (name: string, value: string | boolean) => {
     setValues(prevState => ({ ...prevState, [name]: value }))
+  }
+
+  const handleCheckbox = (name: string, value: string) => {
+    const currentList = (values[name] as string[]) || []
+    setValues(prevState => ({ ...prevState, [name]: removeDuplicateValues([...currentList, ...[value]]) }))
   }
 
   return (
@@ -66,8 +71,8 @@ const ExploreSidebar = ({
                   name={field.name}
                   label={field.label}
                   labelFor={field.name}
-                  isChecked={!!values[field.name]}
-                  onCheck={value => handleChange(field.name, value)}
+                  isChecked={(values[item.name] as string[])?.includes(field.name)}
+                  onCheck={() => handleCheckbox(item.name, field.name)}
                 />
               ))}
 
@@ -80,8 +85,8 @@ const ExploreSidebar = ({
                   value={field.name}
                   label={field.label}
                   labelFor={field.name}
-                  defaultChecked={values[item.name] === field.name}
-                  onCheck={() => handleChange(item.name, field.name)}
+                  defaultChecked={String(values[item.name]) === String(field.name)}
+                  onCheck={() => handleRadio(item.name, field.name)}
                 />
               ))}
             {/* </div> */}

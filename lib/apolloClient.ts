@@ -6,6 +6,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
 function createApolloClient() {
   return new ApolloClient({
+    // connectToDevTools: true,
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
       uri: 'http://localhost:1337/graphql' // Server URL (must be absolute)

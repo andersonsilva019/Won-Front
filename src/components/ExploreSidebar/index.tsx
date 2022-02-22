@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import xor from 'lodash.xor'
 import { Close } from '@styled-icons/material-outlined/Close'
 import { FilterList } from '@styled-icons/material-outlined/FilterList'
 import Radio from 'components/Radio'
@@ -7,7 +8,6 @@ import Heading from 'components/Heading'
 import Button from 'components/Button'
 import * as S from './styles'
 import { ParsedUrlQueryInput } from 'querystring'
-import { removeDuplicateValues } from 'utils/removeDuplicateValues'
 
 type Field = {
   label: string
@@ -53,10 +53,11 @@ const ExploreSidebar = ({
   }
 
   const handleCheckbox = (name: string, value: string) => {
-    const currentList = (values[name] as string[]) || []
+    const currentList = (values[name] as []) || []
+
     setValues(prevState => ({
       ...prevState,
-      [name]: removeDuplicateValues([...currentList, ...[value]])
+      [name]: xor(currentList, [value])
     }))
   }
 

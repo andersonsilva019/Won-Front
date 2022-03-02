@@ -1,11 +1,10 @@
-import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithTheme } from 'utils/test/helpers'
+import { render, screen, waitFor } from 'utils/test-utils'
 
 import Checkbox from '.'
 describe('<Checkbox />', () => {
   it('should render with label', () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="check" />)
+    render(<Checkbox label="checkbox label" labelFor="check" />)
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
     expect(screen.getByText(/checkbox label/i)).toBeInTheDocument()
     expect(screen.getByText(/checkbox label/i)).toHaveAttribute('for', 'check')
@@ -13,13 +12,13 @@ describe('<Checkbox />', () => {
   })
 
   it('should not render when label is undefinded', () => {
-    renderWithTheme(<Checkbox />)
+    render(<Checkbox />)
 
     expect(screen.queryByLabelText('checkbox label')).not.toBeInTheDocument()
   })
 
   it('should render with black label', () => {
-    renderWithTheme(
+    render(
       <Checkbox label="Checkbox label" labelFor="check" labelColor="black" />
     )
 
@@ -29,7 +28,7 @@ describe('<Checkbox />', () => {
   })
 
   it('should render with white label by default', () => {
-    renderWithTheme(
+    render(
       <Checkbox label="Checkbox label" labelFor="check" labelColor="white" />
     )
 
@@ -41,7 +40,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(
+    render(
       <Checkbox
         label="Checkbox label"
         labelFor="check"
@@ -64,7 +63,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(
+    render(
       <Checkbox
         label="Checkbox label"
         labelFor="check"
@@ -86,7 +85,7 @@ describe('<Checkbox />', () => {
   })
 
   it('should be accessible with tab', () => {
-    renderWithTheme(<Checkbox label="Checkbox" labelFor="Checkbox" />)
+    render(<Checkbox label="Checkbox" labelFor="Checkbox" />)
 
     expect(document.body).toHaveFocus()
 

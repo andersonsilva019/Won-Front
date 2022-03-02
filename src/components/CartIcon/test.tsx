@@ -1,9 +1,9 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/test/helpers'
+import { screen, render } from 'utils/test-utils'
+
 import CartIcon from '.'
 describe('<CartIcon />', () => {
   it('should render cart icon without badge', () => {
-    renderWithTheme(<CartIcon />)
+    render(<CartIcon />)
 
     expect(screen.getByLabelText(/shopping cart/i)).toBeInTheDocument()
     expect(screen.queryByLabelText(/cart items/i)).not.toBeInTheDocument()
@@ -12,7 +12,7 @@ describe('<CartIcon />', () => {
   it('should render cart icon with badge', () => {
     const quantity = 10
 
-    renderWithTheme(<CartIcon quantity={quantity} />)
+    render(<CartIcon quantity={quantity} />)
 
     expect(screen.getByLabelText(/shopping cart/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/cart items/i)).toHaveTextContent(
@@ -23,7 +23,7 @@ describe('<CartIcon />', () => {
   it('should render with badge only if has positive numbers', () => {
     const quantity = -1
 
-    renderWithTheme(<CartIcon quantity={quantity} />)
+    render(<CartIcon quantity={quantity} />)
     expect(screen.getByLabelText(/shopping cart/i)).toBeInTheDocument()
     expect(screen.queryByLabelText(/cart items/i)).not.toBeInTheDocument()
   })

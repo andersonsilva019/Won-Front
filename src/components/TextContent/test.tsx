@@ -1,5 +1,5 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/test/helpers'
+import { screen, render } from 'utils/test-utils'
+
 import TextContent from '.'
 
 const props = {
@@ -9,7 +9,7 @@ const props = {
 
 describe('<TextContent />', () => {
   it('should render the title and content', () => {
-    renderWithTheme(<TextContent title={props.title} content={props.content} />)
+    render(<TextContent title={props.title} content={props.content} />)
     expect(
       screen.getByRole('heading', { name: props.title })
     ).toBeInTheDocument()
@@ -19,14 +19,14 @@ describe('<TextContent />', () => {
   })
 
   it('should render without title', () => {
-    renderWithTheme(<TextContent content={props.content} />)
+    render(<TextContent content={props.content} />)
     expect(
       screen.queryByRole('heading', { name: props.title })
     ).not.toBeInTheDocument()
   })
 
   it('should render text with color white when is mobile', () => {
-    renderWithTheme(<TextContent title={props.title} content={props.content} />)
+    render(<TextContent title={props.title} content={props.content} />)
 
     const container = screen.getByRole('heading', { name: props.title })
       .parentElement
@@ -41,7 +41,7 @@ describe('<TextContent />', () => {
   })
 
   it('should render background with color white when is desktop', () => {
-    renderWithTheme(<TextContent title={props.title} content={props.content} />)
+    render(<TextContent title={props.title} content={props.content} />)
 
     const container = screen.getByRole('heading', { name: props.title })
       .parentElement

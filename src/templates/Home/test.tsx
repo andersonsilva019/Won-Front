@@ -1,6 +1,6 @@
 import '../../../.jest/match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/test/helpers'
+import { screen, render } from 'utils/test-utils'
+
 import Home, { HomeTemplateProps } from '.'
 
 import bannerMock from 'components/BannerSlider/mock'
@@ -42,7 +42,7 @@ jest.mock('components/BannerSlider', () => {
 
 describe('<Home />', () => {
   it('should render Banner and Showcase', () => {
-    renderWithTheme(<Home {...props} />)
+    render(<Home {...props} />)
     // Banner Slider
     expect(screen.getByTestId('Mock BannerSlider')).toBeInTheDocument()
     // Showcase

@@ -1,5 +1,5 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/test/helpers'
+import { screen, render } from 'utils/test-utils'
+
 import CartList, { CartListProps } from '.'
 
 import mockGameItem from './mock'
@@ -11,7 +11,7 @@ const props: CartListProps = {
 
 describe('<CartList />', () => {
   it('should render the cart list', () => {
-    const { container } = renderWithTheme(<CartList {...props} />)
+    const { container } = render(<CartList {...props} />)
 
     expect(screen.getAllByRole('heading')).toHaveLength(2)
     expect(screen.getByText('R$ 200,00')).toBeInTheDocument()
@@ -20,7 +20,7 @@ describe('<CartList />', () => {
   })
 
   it('should render the button', () => {
-    renderWithTheme(<CartList {...props} hasButton />)
+    render(<CartList {...props} hasButton />)
 
     expect(
       screen.getByRole('link', { name: /buy it now/i })
@@ -28,7 +28,7 @@ describe('<CartList />', () => {
   })
 
   it('should render empty if there are no games', () => {
-    renderWithTheme(<CartList />)
+    render(<CartList />)
 
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
     expect(screen.queryByText(/total/i)).not.toBeInTheDocument()

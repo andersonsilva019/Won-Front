@@ -1,5 +1,5 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/test/helpers'
+import { screen, render } from 'utils/test-utils'
+
 import Empty, { EmptyProps } from '.'
 
 const props: EmptyProps = {
@@ -9,7 +9,7 @@ const props: EmptyProps = {
 
 describe('<Empty />', () => {
   it('should render correctly', () => {
-    const { container } = renderWithTheme(<Empty {...props} hasLink />)
+    const { container } = render(<Empty {...props} hasLink />)
 
     expect(
       screen.getByRole('img', { name: /a gamer in a couch playing videogame/i })
@@ -29,7 +29,7 @@ describe('<Empty />', () => {
   })
 
   it('should render correctly without link', () => {
-    renderWithTheme(<Empty {...props} />)
+    render(<Empty {...props} />)
 
     expect(
       screen.queryByRole('link', { name: /go back to store/i })

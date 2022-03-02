@@ -1,10 +1,10 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/test/helpers'
+import { screen, render } from 'utils/test-utils'
+
 import Auth from '.'
 
 describe('<Auth />', () => {
   it('should render all components and children', () => {
-    renderWithTheme(<Auth title="Title page">children</Auth>)
+    render(<Auth title="Title page">children</Auth>)
     // Title of Content
     expect(screen.getByText(/title page/i)).toBeInTheDocument()
     // Children of Content

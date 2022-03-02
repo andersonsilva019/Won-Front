@@ -1,12 +1,12 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/test/helpers'
+import { screen, render } from 'utils/test-utils'
+
 import CardsList from '.'
 
 import cardsMock from 'components/PaymentOptions/mock'
 
 describe('<CardsList />', () => {
   it('should render the cards', () => {
-    renderWithTheme(<CardsList cards={cardsMock} />)
+    render(<CardsList cards={cardsMock} />)
     expect(
       screen.getByRole('heading', { name: /my cards/i })
     ).toBeInTheDocument()

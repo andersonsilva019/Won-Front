@@ -15,13 +15,17 @@ type CartItem = {
 
 export type CartContextData = {
   items: CartItem[]
+  quantity: number
+  total: string
 }
 
 export type CartProviderProps = {
   children: React.ReactNode
 }
 export const CartContextDefaultValue: CartContextData = {
-  items: []
+  items: [],
+  quantity: 0,
+  total: '$0.00',
 }
 
 export const CartContext = createContext<CartContextData>(CartContextDefaultValue)
@@ -43,10 +47,16 @@ export function CartProvider({ children }: CartProviderProps) {
     variables: { where: { id: cartItems } }
   })
 
+  const total = data?.games.reduce((acc, game) => {
+    return acc + game.price
+  }, 0)
+
   return (
     <CartContext.Provider
       value={{
-        items: cartMapper(data?.games)
+        items: cartMapper(data?.games),
+        quantity: cartItems.length,
+        total: formatPrice(total || 0),
       }}
     >
       {children}

@@ -19,6 +19,7 @@ export const Content = styled.div`
     margin-top: ${theme.spacings.small};
     position: absolute;
     right: 0;
+    z-index: ${theme.layers.alwaysOnTop};
     &::before {
       content: '';
       position: absolute;
@@ -60,12 +61,14 @@ const overlayModifiers = {
 }
 
 export const Overlay = styled.div<ContainerProps>`
-  ${({ isOpen }) => css`
+  ${({ isOpen, theme }) => css`
+    background: rgba(0,0,0,0.5);
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
+    z-index: ${theme.layers.overlay};
     ${isOpen && overlayModifiers.open()}
     ${!isOpen && overlayModifiers.close()}
   `}

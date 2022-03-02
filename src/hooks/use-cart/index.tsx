@@ -1,17 +1,35 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { getStorageItem } from 'utils/localStorage'
 
-export type CartContextData = {}
+const CART_KEY = 'cartItems'
+
+export type CartContextData = {
+  items: string[]
+}
 
 export type CartProviderProps = {
   children: React.ReactNode
 }
-export const CartContextDefaultValue: CartContextData = {}
+export const CartContextDefaultValue: CartContextData = {
+  items: []
+}
 
 export const CartContext = createContext<CartContextData>(CartContextDefaultValue)
 
-export function CartContextProvider({ children }: CartProviderProps) {
+export function CartProvider({ children }: CartProviderProps) {
+
+  const [cartItems, setCartItems] = useState<string[]>([])
+
+  useEffect(() => {
+    const data = getStorageItem(CART_KEY)
+
+    if (data) {
+      setCartItems(data)
+    }
+  }, [])
+
   return (
-    <CartContext.Provider value={{}}>
+    <CartContext.Provider value={{ items: cartItems }}>
       {children}
     </CartContext.Provider>
   )

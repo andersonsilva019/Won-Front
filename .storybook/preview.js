@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from 'styles/GlobalStyles'
+import { CartContext, CartContextDefaultValue } from '../src/hooks/use-cart'
 import theme from 'styles/theme'
 
 export const parameters = {
@@ -19,10 +20,16 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story) => (
+  (Story, context) => (
     <ThemeProvider theme={theme}>
-      <GlobalStyles removeBg />
-      <Story />
+      <CartContext.Provider value={{
+        ...CartContextDefaultValue,
+        ...(context?.args.cartContextValue || {}),
+        ...context?.args,
+      }}>
+        <GlobalStyles removeBg />
+        <Story />
+      </CartContext.Provider>
     </ThemeProvider>
   )
 ]

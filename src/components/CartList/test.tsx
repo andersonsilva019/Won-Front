@@ -1,17 +1,21 @@
+import { CartContextDefaultValue } from 'hooks/use-cart'
 import { screen, render } from 'utils/test-utils'
 
-import CartList, { CartListProps } from '.'
+import CartList from '.'
 
-import mockGameItem from './mock'
+import items from './mock'
 
-const props: CartListProps = {
-  items: mockGameItem,
-  total: 'R$ 200,00'
-}
 
 describe('<CartList />', () => {
   it('should render the cart list', () => {
-    const { container } = render(<CartList {...props} />)
+
+    const cartProviderProps = {
+      ...CartContextDefaultValue,
+      items,
+      total: 'R$ 200,00',
+    }
+
+    const { container } = render(<CartList />, { cartProviderProps })
 
     expect(screen.getAllByRole('heading')).toHaveLength(2)
     expect(screen.getByText('R$ 200,00')).toBeInTheDocument()
@@ -20,7 +24,13 @@ describe('<CartList />', () => {
   })
 
   it('should render the button', () => {
-    render(<CartList {...props} hasButton />)
+    const cartProviderProps = {
+      ...CartContextDefaultValue,
+      items,
+      total: 'R$ 200,00',
+    }
+
+    render(<CartList hasButton />, { cartProviderProps })
 
     expect(
       screen.getByRole('link', { name: /buy it now/i })

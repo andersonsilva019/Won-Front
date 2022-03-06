@@ -251,6 +251,7 @@ exports[`<GameInfo /> should render title, description and price 1`] = `
     >
       <svg
         aria-hidden="true"
+        aria-label="Add to Cart"
         class="c7"
         fill="currentColor"
         focusable="false"

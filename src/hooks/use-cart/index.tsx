@@ -1,5 +1,5 @@
 import { useQueryGames } from 'graphql/queries/games'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { formatPrice } from 'utils/formatPrice'
 import { getStorageItem, setStorageItem } from 'utils/localStorage'
 import { cartMapper } from 'utils/mappers'
@@ -35,13 +35,14 @@ export const CartContextDefaultValue: CartContextData = {
   addToCart: () => null,
   removeFromCart: () => null,
   clearCart: () => null,
-  loading: false,
+  loading: false
 }
 
-export const CartContext = createContext<CartContextData>(CartContextDefaultValue)
+export const CartContext = createContext<CartContextData>(
+  CartContextDefaultValue
+)
 
 export function CartProvider({ children }: CartProviderProps) {
-
   const [cartItems, setCartItems] = useState<string[]>([])
 
   useEffect(() => {
@@ -57,11 +58,13 @@ export function CartProvider({ children }: CartProviderProps) {
     variables: { where: { id: cartItems } }
   })
 
-  const total = data?.games.reduce((acc, game) => {
-    return acc + game.price
-  }, 0)
+  const total = useMemo(() => {
+    return data?.games.reduce((acc, game) => {
+      return acc + game.price
+    }, 0)
+  }, [data])
 
-  const isInCart = (id: string) => id ? cartItems.includes(id) : false
+  const isInCart = (id: string) => (id ? cartItems.includes(id) : false)
 
   const saveCart = (cartItems: string[]) => {
     setCartItems(cartItems)

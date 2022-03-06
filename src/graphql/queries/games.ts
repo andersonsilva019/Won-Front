@@ -8,7 +8,7 @@ export const QUERY_GAMES = gql`
       ...GameFragment
     }
 
-    gamesConnection(where: $where){
+    gamesConnection(where: $where) {
       values {
         id
       }

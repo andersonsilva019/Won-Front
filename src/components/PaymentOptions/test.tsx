@@ -26,9 +26,7 @@ describe('<PaymentOptions />', () => {
   it('should not call handlePayment function when button is disabled', () => {
     const handlePayment = jest.fn()
 
-    render(
-      <PaymentOptions cards={cards} handlePayment={handlePayment} />
-    )
+    render(<PaymentOptions cards={cards} handlePayment={handlePayment} />)
 
     userEvent.click(screen.getByRole('button', { name: /buy now/i }))
 
@@ -38,9 +36,7 @@ describe('<PaymentOptions />', () => {
   it('should call handlePayment function when credit cart is select', async () => {
     const handlePayment = jest.fn()
 
-    render(
-      <PaymentOptions cards={cards} handlePayment={handlePayment} />
-    )
+    render(<PaymentOptions cards={cards} handlePayment={handlePayment} />)
     // clique na label do cartão
     userEvent.click(screen.getByLabelText(/4325/))
     // clique no botão de comprar

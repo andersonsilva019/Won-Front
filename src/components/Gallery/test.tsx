@@ -43,9 +43,7 @@ describe('<Gallery />', () => {
   })
 
   it('should handle close modal when ESC button is pressed', () => {
-    const { container } = render(
-      <Gallery items={mockItems.slice(0, 2)} />
-    )
+    const { container } = render(<Gallery items={mockItems.slice(0, 2)} />)
 
     const modal = screen.getByLabelText('modal')
 

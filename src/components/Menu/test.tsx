@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from 'utils/test-utils'
 import Menu from '.'
 
-
 describe('<Menu />', () => {
   it('should render the menu', () => {
     render(<Menu />)

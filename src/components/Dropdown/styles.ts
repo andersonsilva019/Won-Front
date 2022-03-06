@@ -62,7 +62,7 @@ const overlayModifiers = {
 
 export const Overlay = styled.div<ContainerProps>`
   ${({ isOpen, theme }) => css`
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     position: fixed;
     width: 100%;
     height: 100%;

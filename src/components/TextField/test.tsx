@@ -35,9 +35,7 @@ describe('<TextField />', () => {
   it('should call onInput function', async () => {
     const onInput = jest.fn()
 
-    render(
-      <TextField label="label input" name="input" onInput={onInput} />
-    )
+    render(<TextField label="label input" name="input" onInput={onInput} />)
 
     const input = screen.getByRole('textbox')
     const text = 'This is my text'

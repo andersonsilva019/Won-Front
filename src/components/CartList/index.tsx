@@ -11,7 +11,6 @@ export type CartListProps = {
 }
 
 const CartList = ({ hasButton = false }: CartListProps) => {
-
   const { items, total, loading } = useCart()
 
   if (loading) {

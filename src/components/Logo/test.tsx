@@ -1,7 +1,6 @@
 import { screen, render } from 'utils/test-utils'
 import Logo from '.'
 
-
 describe('<Logo />', () => {
   it('should render the logo with id passed', () => {
     const { container } = render(<Logo id="myId" />)

@@ -4,7 +4,6 @@ import { useCart } from 'hooks/use-cart'
 import * as S from './styles'
 
 const CartIcon = () => {
-
   const { quantity } = useCart()
 
   return (

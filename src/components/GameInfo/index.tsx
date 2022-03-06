@@ -1,7 +1,4 @@
-import {
-  AddShoppingCart as AddShoppingCartIcon,
-  FavoriteBorder as FavoriteBorderIcon
-} from '@styled-icons/material-outlined'
+import { FavoriteBorder as FavoriteBorderIcon } from '@styled-icons/material-outlined'
 import Button from 'components/Button'
 import Ribbon from 'components/Ribbon'
 import Heading from 'components/Heading'

@@ -2,7 +2,6 @@ import '../../../.jest/match-media-mock'
 import { screen, render } from 'utils/test-utils'
 import Profile from '.'
 
-
 jest.mock('next/router', () => ({
   useRouter: jest.fn(() => ({ asPath: '/profile/me' }))
 }))

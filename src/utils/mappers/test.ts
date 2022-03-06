@@ -1,6 +1,9 @@
 import { QueryGames_games } from 'graphql/generated/QueryGames'
-import { QueryHome_banners, QueryHome_sections_newGames_highlight } from 'graphql/generated/QueryHome'
-import { bannerMapper, cartMapper, gamesMapper, highlightMapper }  from '.'
+import {
+  QueryHome_banners,
+  QueryHome_sections_newGames_highlight
+} from 'graphql/generated/QueryHome'
+import { bannerMapper, cartMapper, gamesMapper, highlightMapper } from '.'
 
 describe('bannerMapper()', () => {
   it('should return the right format when mapped', () => {
@@ -21,24 +24,25 @@ describe('bannerMapper()', () => {
       }
     } as QueryHome_banners
 
-    expect(bannerMapper([banner])).toStrictEqual([{
-      img: 'http://localhost:1337/image.jpg',
-      title: 'Banner title',
-      subtitle: 'Banner subtitle',
-      buttonLabel: 'button label',
-      buttonLink: 'button link',
-      ribbon: 'ribbon text',
-      ribbonColor: 'primary',
-      ribbonSize: 'small'
-    }])
+    expect(bannerMapper([banner])).toStrictEqual([
+      {
+        img: 'http://localhost:1337/image.jpg',
+        title: 'Banner title',
+        subtitle: 'Banner subtitle',
+        buttonLabel: 'button label',
+        buttonLink: 'button link',
+        ribbon: 'ribbon text',
+        ribbonColor: 'primary',
+        ribbonSize: 'small'
+      }
+    ])
   })
 })
 
 describe('gamesMapper()', () => {
   it('should return an empty array if there are no games', () => {
-    expect(gamesMapper(null)).toStrictEqual([]);
+    expect(gamesMapper(null)).toStrictEqual([])
   })
-
 
   it('should return correct format when mapped', () => {
     const game = {

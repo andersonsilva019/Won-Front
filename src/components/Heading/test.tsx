@@ -1,7 +1,6 @@
 import { screen, render } from 'utils/test-utils'
 import Heading from '.'
 
-
 describe('<Heading />', () => {
   it('should render a white heading by default', () => {
     render(<Heading>Won Games</Heading>)

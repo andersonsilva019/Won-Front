@@ -16,7 +16,6 @@ export const noGamesMock = {
   }
 }
 
-
 export const gamesMock = {
   request: {
     query: QUERY_GAMES,

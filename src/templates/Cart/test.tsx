@@ -5,7 +5,6 @@ import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import cardMock from 'components/PaymentOptions/mock'
 
-
 const props: CartTemplateProps = {
   recommendedGames: gamesMock.slice(0, 5),
   recommendedHighlight: highlightMock,

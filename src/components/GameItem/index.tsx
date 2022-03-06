@@ -26,7 +26,6 @@ const GameItem = ({
   downloadLink,
   paymentInfo
 }: GameItemProps) => {
-
   const { isInCart, removeFromCart } = useCart()
 
   return (
@@ -51,9 +50,7 @@ const GameItem = ({
           <S.Group>
             <S.Price>{price}</S.Price>
             {isInCart(id) && (
-              <S.Remove onClick={() => removeFromCart(id)}>
-                Remove
-              </S.Remove>
+              <S.Remove onClick={() => removeFromCart(id)}>Remove</S.Remove>
             )}
           </S.Group>
         </S.Content>

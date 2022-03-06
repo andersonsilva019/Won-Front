@@ -1,7 +1,6 @@
 import { screen, render } from 'utils/test-utils'
 import Ribbon from '.'
 
-
 describe('<Ribbon />', () => {
   it('should render the text correctly', () => {
     render(<Ribbon>Best Sellers</Ribbon>)

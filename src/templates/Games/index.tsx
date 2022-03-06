@@ -30,7 +30,6 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
     }
   })
 
-
   if (!data) return <p>loading...</p>
 
   const { games, gamesConnection } = data
@@ -80,7 +79,10 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
                 {hasMoreGames && (
                   <S.ShowMore>
                     {loading ? (
-                      <S.ShowMoreLoading src="/images/dots.svg" alt="Loading more games..." />
+                      <S.ShowMoreLoading
+                        src="/images/dots.svg"
+                        alt="Loading more games..."
+                      />
                     ) : (
                       <S.ShowMoreButton role="button" onClick={handleShowMore}>
                         <p>Show More</p>

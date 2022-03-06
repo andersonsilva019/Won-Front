@@ -4,9 +4,7 @@ import { CartContextDefaultValue } from 'hooks/use-cart'
 import items from 'components/CartList/mock'
 import CartDropdown from '.'
 
-
 describe('<CartDropdown />', () => {
-
   beforeEach(() => {
     const cartProviderProps = {
       ...CartContextDefaultValue,

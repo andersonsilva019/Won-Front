@@ -1,7 +1,6 @@
 import { screen, render } from 'utils/test-utils'
 import Game, { GameTemplateProps } from '.'
 
-
 import galleryMock from 'components/Gallery/mock'
 import gameInfoMock from 'components/GameInfo/mock'
 import gameDetailsMock from 'components/GameDetails/mock'

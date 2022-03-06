@@ -11,11 +11,11 @@ describe('<CartIcon />', () => {
   })
 
   it('should render cart icon with badge', () => {
-    render(<CartIcon />, { cartProviderProps: { ...CartContextDefaultValue, quantity: 3 } })
+    render(<CartIcon />, {
+      cartProviderProps: { ...CartContextDefaultValue, quantity: 3 }
+    })
 
     expect(screen.getByLabelText(/shopping cart/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/cart items/i)).toHaveTextContent(
-      String(3)
-    )
+    expect(screen.getByLabelText(/cart items/i)).toHaveTextContent(String(3))
   })
 })

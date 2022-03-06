@@ -34,7 +34,6 @@ jest.mock('next/link', () => ({
 }))
 
 describe('<Games />', () => {
-
   it('should render sections', async () => {
     render(
       <MockedProvider mocks={[gamesMock]} addTypename={false}>

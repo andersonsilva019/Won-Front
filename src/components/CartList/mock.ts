@@ -1,5 +1,3 @@
-import { GameItemProps } from 'components/GameItem'
-
 const mockGameItem = [
   {
     id: '1',

@@ -30,7 +30,6 @@ export const Basic: Story<GameCardProps> = args => (
   </div>
 )
 
-
 export const IsInCart: Story<GameCardProps & CartContextData> = args => (
   <div style={{ width: '30rem' }}>
     <GameCard {...args} />

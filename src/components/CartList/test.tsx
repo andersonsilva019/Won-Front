@@ -5,14 +5,12 @@ import CartList from '.'
 
 import items from './mock'
 
-
 describe('<CartList />', () => {
   it('should render the cart list', () => {
-
     const cartProviderProps = {
       ...CartContextDefaultValue,
       items,
-      total: 'R$ 200,00',
+      total: 'R$ 200,00'
     }
 
     const { container } = render(<CartList />, { cartProviderProps })
@@ -27,7 +25,7 @@ describe('<CartList />', () => {
     const cartProviderProps = {
       ...CartContextDefaultValue,
       items,
-      total: 'R$ 200,00',
+      total: 'R$ 200,00'
     }
 
     render(<CartList hasButton />, { cartProviderProps })
@@ -40,7 +38,7 @@ describe('<CartList />', () => {
   it('should render loading', () => {
     const cartProviderProps = {
       ...CartContextDefaultValue,
-      loading: true,
+      loading: true
     }
 
     render(<CartList hasButton />, { cartProviderProps })

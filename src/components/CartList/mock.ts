@@ -1,6 +1,6 @@
 import { GameItemProps } from 'components/GameItem'
 
-const mockGameItem: GameItemProps[] = [
+const mockGameItem = [
   {
     id: '1',
     img: 'https://source.unsplash.com/user/willianjusten/151x70',

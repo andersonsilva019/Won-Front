@@ -27,9 +27,11 @@ const CartList = ({ hasButton = false }: CartListProps) => {
       {/* eslint-disable-next-line */}
       {items.length > 0 ? (
         <>
-          {items.map(item => (
-            <GameItem key={item.title} {...item} />
-          ))}
+          <S.GameList>
+            {items.map(item => (
+              <GameItem key={item.title} {...item} />
+            ))}
+          </S.GameList>
           <S.Footer>
             {!hasButton && <span>Total: </span>}
             <S.Total>{total}</S.Total>

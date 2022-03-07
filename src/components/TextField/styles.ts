@@ -69,6 +69,14 @@ export const Input = styled.input<IconPositionProps>`
     border: 0;
     outline: none;
     width: 100%;
+
+    &:-webkit-autofill {
+      // Chrome, Safari e Edge
+      -webkit-box-shadow: 0 0 0px ${theme.spacings.small} ${theme.colors.lightGray} inset;
+
+      // Firefox
+      filter: none;
+    }
   `}
 `
 export const Icon = styled.div<IconPositionProps>`

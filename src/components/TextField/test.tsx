@@ -32,10 +32,10 @@ describe('<TextField />', () => {
 
     expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
   })
-  it('should call onInput function', async () => {
-    const onInput = jest.fn()
+  it('should call onInputChange function', async () => {
+    const onInputChange = jest.fn()
 
-    render(<TextField label="label input" name="input" onInput={onInput} />)
+    render(<TextField label="label input" name="input" onInputChange={onInputChange} />)
 
     const input = screen.getByRole('textbox')
     const text = 'This is my text'
@@ -44,10 +44,10 @@ describe('<TextField />', () => {
 
     await waitFor(() => {
       expect(input).toHaveValue(text)
-      expect(onInput).toHaveBeenCalledTimes(text.length)
+      expect(onInputChange).toHaveBeenCalledTimes(text.length)
     })
 
-    expect(onInput).toHaveBeenCalledWith(text)
+    expect(onInputChange).toHaveBeenCalledWith(text)
   })
 
   it('Renders with Icon', () => {
@@ -67,10 +67,10 @@ describe('<TextField />', () => {
   })
 
   it('does not changes its value when disabled', async () => {
-    const onInput = jest.fn()
+    const onInputChange = jest.fn()
 
     render(
-      <TextField onInput={onInput} label="Label field" name="field" disabled />
+      <TextField onInputChange={onInputChange} label="Label field" name="field" disabled />
     )
 
     const input = screen.getByRole('textbox')
@@ -83,7 +83,7 @@ describe('<TextField />', () => {
       expect(input).not.toHaveValue(text)
     })
 
-    expect(onInput).not.toHaveBeenCalled()
+    expect(onInputChange).not.toHaveBeenCalled()
   })
 
   it('Is not accessible by tab when disabled', () => {

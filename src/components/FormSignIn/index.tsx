@@ -5,13 +5,14 @@ import { signIn } from 'next-auth/client'
 import { Email, Lock } from '@styled-icons/material-outlined'
 import Button from '../Button'
 import TextField from '../TextField'
-import { FormContainer, FormLink } from '../Form'
+import { FormContainer, FormLink, FormLoading } from '../Form'
 import * as S from './styles'
 
 const FormSignIn = () => {
 
   const router = useRouter();
 
+  const [loading, setLoading] = useState(false)
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -24,6 +25,8 @@ const FormSignIn = () => {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    setLoading(true);
+
     const response = await signIn('credentials', {
       email: values.email,
       password: values.password,
@@ -33,7 +36,10 @@ const FormSignIn = () => {
 
     if (response?.url) {
       router.push(response.url);
+      setLoading(false);
     }
+
+    setLoading(false);
 
     console.error('Email ou senha inválidos');
   }
@@ -56,8 +62,12 @@ const FormSignIn = () => {
           onInputChange={(value) => handleInput('password', value)}
         />
         <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
-        <Button type="submit" size="large" fullWidth>
-          Sign in now
+        <Button type="submit" size="large" fullWidth disabled={loading}>
+          {loading ? (
+            <FormLoading />
+          ) : (
+            <span>Sign in now</span>
+          )}
         </Button>
         <FormLink>
           Don’t have an account?

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Email, Lock, AccountCircle } from '@styled-icons/material-outlined'
 import Button from '../Button'
 import TextField from '../TextField'
-import { FormContainer, FormLink } from '../Form'
+import { FormContainer, FormLink, FormLoading } from '../Form'
 import { useState } from 'react'
 import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 import { useMutation } from '@apollo/client'
@@ -13,6 +13,7 @@ const FormSignUp = () => {
 
   const router = useRouter();
 
+  const [loading, setLoading] = useState(false)
   const [values, setValues] = useState<UsersPermissionsRegisterInput>({
     email: '',
     password: '',
@@ -27,6 +28,9 @@ const FormSignUp = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    setLoading(true)
+
     createUser({
       variables: {
         input: {
@@ -36,6 +40,9 @@ const FormSignUp = () => {
         }
       }
     })
+
+    setLoading(false)
+
     router.push('/sign-in')
   }
 
@@ -70,8 +77,12 @@ const FormSignUp = () => {
           icon={<Lock />}
           onInputChange={(value) => handleInput('confirm_password', value)}
         />
-        <Button size="large" fullWidth type="submit">
-          Sign up now
+        <Button size="large" fullWidth type="submit" disabled={loading}>
+          {loading ? (
+            <FormLoading />
+          ) : (
+            <span>Sign up now</span>
+          )}
         </Button>
         <FormLink>
           Already have an account?

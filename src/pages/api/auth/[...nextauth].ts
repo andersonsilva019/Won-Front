@@ -1,23 +1,29 @@
 import NextAuth from "next-auth"
 import Providers from "next-auth/providers"
 
-import { NextApiRequest, NextApiResponse } from 'next'
+type AuthorizeFnTypes = {
+  email: string;
+  password: string;
+}
 
-const options = {
-  pages: {
-    signIn: '/sign-in',
-  },
+export default NextAuth({
   providers: [
     Providers.Credentials({
       name: 'Sign-in',
       credentials: {},
-      async authorize({ email, password }) {
+      async authorize(credentials: AuthorizeFnTypes) {
+
+        console.log(credentials)
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/local`, {
           method: 'POST',
-          body: new URLSearchParams({ identifier: email, password }),
+          body: new URLSearchParams({
+            identifier: credentials.email,
+            password: credentials.password
+          }),
         }
         )
+        console.log({ response })
 
         const data = await response.json()
 
@@ -56,9 +62,4 @@ const options = {
       return Promise.resolve(token);
     }
   }
-}
-
-const Auth = (req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, options);
-
-export default Auth;
+})

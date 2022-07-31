@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Email, Lock, AccountCircle } from '@styled-icons/material-outlined'
 import Button from '../Button'
 import TextField from '../TextField'
@@ -9,6 +10,8 @@ import { useMutation } from '@apollo/client'
 import { MUTATION_REGISTER } from 'graphql/mutations/register'
 
 const FormSignUp = () => {
+
+  const router = useRouter();
 
   const [values, setValues] = useState<UsersPermissionsRegisterInput>({
     email: '',
@@ -33,6 +36,7 @@ const FormSignUp = () => {
         }
       }
     })
+    router.push('/sign-in')
   }
 
   return (
